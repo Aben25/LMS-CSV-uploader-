@@ -18,7 +18,7 @@ const FileUploader = () => {
             formData.append('file', selectedFiles[i]);
         }
 
-        axios.post('http://flask-env.eba-26p8rgfb.us-east-1.elasticbeanstalk.com/upload', formData, {
+        axios.post('//awseb-e-2-awsebloa-qeesm5o2k5oe-1888775464.us-east-1.elb.amazonaws.com/upload', formData, {
             onUploadProgress: (progressEvent) => {
             },
             responseType: 'json',
