@@ -15,7 +15,7 @@ export default function Home() {
       LMS CSV Uploader
       </h1>
       <FileUploader />
-      <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="https://artba.sisense.com/app/main/dashboards/63e14901cde28c003326f83c">Open Dashboard</a>
+      <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="https://artba.sisense.com/app/main/dashboards/6388e23d1254c600373039dc">Open Dashboard</a>
 
       <Helmet>
         <iframe width="100%" frameborder="0" src="https://artba.sisense.com/app/main/dashboards/6388e23d1254c600373039dc/widgets/63d938afcde28c003326e171?embed=true&r=true&l=true&t=true&h=true"></iframe>
