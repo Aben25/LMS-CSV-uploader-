@@ -11,6 +11,7 @@ const FileUploader = () => {
     }
 
     const handleUpload = () => {
+        setUploadMessage('');
         setLoading(true);
 
         const formData = new FormData();
@@ -18,7 +19,7 @@ const FileUploader = () => {
             formData.append('file', selectedFiles[i]);
         }
 
-        axios.post('https://flask-env.eba-26p8rgfb.us-east-1.elasticbeanstalk.com/upload', formData, {
+        axios.post('http://127.0.0.1:8080/upload', formData, {
             onUploadProgress: (progressEvent) => {
             },
             responseType: 'json',
@@ -37,9 +38,9 @@ const FileUploader = () => {
     }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col container">
             <input className="py-2 px-3 border border-gray-400 rounded-lg" type="file" onChange={handleFileChange} multiple />
-            <button className={`py-2 px-3 bg-indigo-500 text-white rounded-lg my-2 hover:bg-indigo-600 ${loading ? 'cursor-not-allowed' : ''}`} onClick={handleUpload} disabled={loading}>
+            <button className={`py-2 px-3 bg-black text-white rounded-lg my-2 hover:bg-gray-600 ${loading ? 'cursor-not-allowed' : ''}`} onClick={handleUpload} disabled={loading}>
                 {loading ? (
                     <>
         
