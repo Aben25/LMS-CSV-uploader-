@@ -5,7 +5,7 @@ import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
 import FileUploader from "./Upload";
 import { Helmet } from 'react-helmet';
-import Nav from "./app/Nav";
+import Nav from "./Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
