@@ -19,7 +19,7 @@ const FileUploader = () => {
             formData.append('file', selectedFiles[i]);
         }
 
-        axios.post('https://analytics.artbatdf.org//upload', formData, {
+        axios.post('https://analytics.artbatdf.org/upload', formData, {
             onUploadProgress: (progressEvent) => {
             },
             responseType: 'json',
