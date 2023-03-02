@@ -22,7 +22,7 @@ export default function Nav() {
       .join('&');
 
     // send POST request using fetch
-    fetch('https://b4qyaiouscte5mtek47e3piaaq0hdnls.lambda-url.us-east-1.on.aws/?email=' + email + '&url=' + window.location.href, {
+    fetch('https://b4qyaiouscte5mtek47e3piaaq0hdnls.lambda-url.us-east-1.on.aws/?email=' + email + '&url=' + window.location.href + 'filename=' + 'LMS_report.pdf' + '&subjectLine=' + 'LMS Report' + '&body=' + 'Please find attached the LMS report',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
