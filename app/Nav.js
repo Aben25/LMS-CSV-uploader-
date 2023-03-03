@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import React, { useState } from 'react';
 import EmailPopup from './EmailPopup';
@@ -7,9 +6,13 @@ export default function Nav() {
   const [email, setEmail] = useState('');
   const [formStatus, setFormStatus] = useState('');
   const [formMessage, setFormMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // set loading state to true
+    setIsLoading(true);
 
     // build URL parameter string from form data
     const formData = {
@@ -22,7 +25,7 @@ export default function Nav() {
       .join('&');
 
     // send POST request using fetch
-    fetch('https://b4qyaiouscte5mtek47e3piaaq0hdnls.lambda-url.us-east-1.on.aws/?email=' + email + '&url=' + window.location.href + '&filename=' + 'LMS_report.pdf' + '&subjectLine=' + 'LMS Report' + '&bodyText=' + 'Please find attached the LMS report',{
+    fetch('https://b4qyaiouscte5mtek47e3piaaq0hdnls.lambda-url.us-east-1.on.aws/?email=' + email + '&url=' + window.location.href + '&filename=' + 'LMS_report.pdf' + '&subjectLine=' + 'LMS Report' + '&bodyText=' + 'Please find attached the LMS report', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,11 +40,15 @@ export default function Nav() {
           setFormStatus('error');
           setFormMessage('An error occurred while submitting the form. Please refresh the page and try again.');
         }
+        // set loading state back to false
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error);
         setFormStatus('error');
         setFormMessage('An error occurred while submitting the form. Please refresh the page and try again.');
+        // set loading state back to false
+        setIsLoading(false);
       });
   };
 
@@ -57,21 +64,22 @@ export default function Nav() {
           <form className="flex flex-row items-center justify-center w-full gap-3" >
             <input className="w-64 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <button onClick={handleSubmit} className="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              <svg className="-ml-1 mr-2 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-              Send me report
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                'Send me report'
+              )}
             </button>
           </form>
-          {formStatus === 'success' && (
-            <p className="text-green-500">{formMessage}</p>
-          )}
-          {formStatus === 'error' && (
-            <p className="text-red-500">{formMessage}</p>
-          )}
-
-
-
         </div>
       </div>
     </nav>
   );
 }
+
